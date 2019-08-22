@@ -1,0 +1,15 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: QuartzSchedule
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/schedule?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: taoqy
+    password: password123
+mybatis:
+  type-aliases-package: com.taoqy.entity
+  configuration:
+    map-underscore-to-camel-case: true
+quartz:
+  enabled: true
