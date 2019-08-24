@@ -1,6 +1,6 @@
 package com.taoqy.service;
 
-import com.taoqy.config.SXZDJob;
+
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @since bapfopm-pfpsmas-cbfsms-service 1.0
  */
 @Component
-public class AsyncJob implements SXZDJob {
+public class AsyncJob implements Job {
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         System.out.println("========================立即执行的任务，只执行一次===============================");
@@ -25,7 +25,7 @@ public class AsyncJob implements SXZDJob {
         System.out.println("taskData=====:"+context.getJobDetail().getJobDataMap().get("asyncData"));
     }
 
-    @Override
+
     public String getCron() {
         return null;
     }

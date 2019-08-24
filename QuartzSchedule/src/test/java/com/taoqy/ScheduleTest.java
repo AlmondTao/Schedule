@@ -1,6 +1,7 @@
 package com.taoqy;
 
-import com.taoqy.config.SXZDJob;
+
+import com.taoqy.config2.quartz.SXZDJob;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.quartz.Job;

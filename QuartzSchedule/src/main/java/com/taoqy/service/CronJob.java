@@ -1,7 +1,8 @@
 package com.taoqy.service;
 
-import com.taoqy.config.SXZDJob;
-import org.quartz.Job;
+
+import com.taoqy.config2.quartz.SXZDJob;
+
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.stereotype.Component;
@@ -37,6 +38,22 @@ public class CronJob implements SXZDJob {
 
     @Override
     public String getCron() {
-        return null;
+
+            return "*/20 * * * * ?";
+    }
+
+    @Override
+    public String getJobName() {
+        return "test1";
+    }
+
+    @Override
+    public String getJobGroup(){
+        return "group1";
+    }
+
+    @Override
+    public boolean disabled() {
+        return true;
     }
 }

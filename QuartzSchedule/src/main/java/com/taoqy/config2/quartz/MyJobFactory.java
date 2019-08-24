@@ -1,4 +1,4 @@
-package com.taoqy.config;
+package com.taoqy.config2.quartz;
 
 import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.BeansException;
@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 import org.springframework.stereotype.Component;
+
 
 /**
  * 〈一句话功能简述〉
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Component;
  * @see [相关类/方法]
  * @since bapfopm-pfpsmas-cbfsms-service 1.0
  */
-//@Component
+@Component
 public class MyJobFactory extends SpringBeanJobFactory implements ApplicationContextAware {
 
     private transient AutowireCapableBeanFactory beanFactory;

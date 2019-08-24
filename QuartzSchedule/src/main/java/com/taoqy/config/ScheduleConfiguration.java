@@ -19,7 +19,7 @@ import java.util.Properties;
  * @see [相关类/方法]
  * @since bapfopm-pfpsmas-cbfsms-service 1.0
  */
-@Configuration
+//@Configuration
 public class ScheduleConfiguration {
 
     @Autowired
