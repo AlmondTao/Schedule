@@ -25,7 +25,7 @@ public class ScheduleConfiguration {
     @Autowired
     private MyJobFactory myJobFactory;
 
-    @Bean
+//    @Bean
     public SchedulerFactoryBean schedulerFactoryBean() throws IOException {
         //获取配置属性
         PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();

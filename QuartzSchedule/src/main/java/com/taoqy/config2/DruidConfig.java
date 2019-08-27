@@ -75,7 +75,7 @@ public class DruidConfig {
 
     @Bean
     @Primary
-    public DataSource druidDataSource() {
+    public DruidDataSource druidDataSource() {
         DruidDataSource datasource = new DruidDataSource();
         datasource.setUrl(dbUrl);
         datasource.setUsername(username);

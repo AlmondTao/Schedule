@@ -30,7 +30,7 @@ public class QuartzConfig {
 //        springBeanJobFactory.setSchedulerContext(applicationContext);
 //    }
 
-    @Bean(name = "SchedulerFactory")
+//    @Bean(name = "SchedulerFactory")
     public SchedulerFactoryBean schedulerFactoryBean(){
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
         //用于quartz集群,QuartzScheduler 启动时更新己存在的Job，这样就不用每次修改targetObject后删除qrtz_job_details表对应记录了

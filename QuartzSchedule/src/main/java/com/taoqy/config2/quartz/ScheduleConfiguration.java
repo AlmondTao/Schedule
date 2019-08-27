@@ -14,6 +14,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.util.StringUtils;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
@@ -37,32 +38,36 @@ public class ScheduleConfiguration {
     private List<SXZDJob> jobList;
 
     //直接注入报错
-//    @Autowired
-//    private DruidDataSource druidDataSource;
+    //指定父类可以注入子类
+    //指定子类无法注入父类
+    @Autowired
+    private DruidDataSource druidDataSource;
 
     private static Logger logger = LoggerFactory.getLogger(ScheduleConfiguration.class);
 
-    @Autowired
-    private SchedulerFactoryBean schedulerFactoryBean;
+//    @Autowired
+//    private SchedulerFactoryBean schedulerFactoryBean;
 
     //在方法里作为参数注入可以
-    @Autowired
-//    @Bean("mySchedulerFactoryBean")
-    public SchedulerFactoryBean schedulerFactoryBean(DruidDataSource druidDataSource) throws Exception {
+
+    @Bean
+    public SchedulerFactoryBean schedulerFactoryBean() throws Exception {
         //获取配置属性
         PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
         propertiesFactoryBean.setLocation(new ClassPathResource("quartz.properties"));
         //在quartz.properties中的属性被读取并注入后再初始化对象
         propertiesFactoryBean.afterPropertiesSet();
         //创建SchedulerFactoryBean
-//        SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
+        SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
         Properties pro = propertiesFactoryBean.getObject();
         schedulerFactoryBean.setOverwriteExistingJobs(true);
         schedulerFactoryBean.setAutoStartup(true);
         schedulerFactoryBean.setJobFactory(myJobFactory);
         schedulerFactoryBean.setDataSource(druidDataSource);
         schedulerFactoryBean.setQuartzProperties(pro);
-        schedulerFactoryBean.afterPropertiesSet();
+        schedulerFactoryBean.setBeanName("myBean");
+        //框架会在之后再掉一次afterPropertiesSet方法
+//        schedulerFactoryBean.afterPropertiesSet();
 
 
 //        addCronJob(schedulerFactoryBean);

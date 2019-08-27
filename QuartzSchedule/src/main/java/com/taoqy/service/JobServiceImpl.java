@@ -1,5 +1,6 @@
 package com.taoqy.service;
 
+import com.taoqy.config2.quartz.SXZDJob;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
@@ -40,7 +41,7 @@ public class JobServiceImpl implements  JobService {
             } else {
 
                 //构建job信息
-                jobDetail = JobBuilder.newJob(CronJob.class).withIdentity(jobName, jobGroup).build();
+                jobDetail = JobBuilder.newJob(SXZDJob.class).withIdentity(jobName, jobGroup).build();
                 //用JopDataMap来传递数据
                 jobDetail.getJobDataMap().put("taskData", "hzb-cron-001");
 
