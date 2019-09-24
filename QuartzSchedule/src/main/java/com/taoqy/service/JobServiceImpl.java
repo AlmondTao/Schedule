@@ -128,4 +128,40 @@ public class JobServiceImpl implements  JobService {
         }
 
     }
+
+    @Override
+    public void reSetCronJob(String jobName, String jobGroup, String cron) {
+        try {
+            JobDataMap jobDataMap = new JobDataMap();
+            jobDataMap.put("healer", "hehehe2");
+            Scheduler scheduler = schedulerFactoryBean.getScheduler();
+            CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cron);
+            TriggerKey triggerKey = TriggerKey.triggerKey(jobName + "_trigger", jobGroup + "_trigger");
+            Trigger trigger = TriggerBuilder.newTrigger().withIdentity(jobName + "_trigger", jobGroup + "_trigger")
+                    .withSchedule(scheduleBuilder).usingJobData(jobDataMap).build();
+            scheduler.rescheduleJob(triggerKey, trigger);
+//            scheduler.resumeTrigger(triggerKey);
+            System.out.println("=========================restart job:" + jobName+":"+cron + " success========================");
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteTrigger(String triggerName, String triggerGroup) {
+        try {
+            JobDataMap jobDataMap = new JobDataMap();
+            jobDataMap.put("healer", "hehehe2");
+            Scheduler scheduler = schedulerFactoryBean.getScheduler();
+//            CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cron);
+            TriggerKey triggerKey = TriggerKey.triggerKey(triggerName, triggerGroup);
+//            Trigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerName, triggerGroup)
+//                    .withSchedule(scheduleBuilder).usingJobData(jobDataMap).build();
+            scheduler.unscheduleJob(triggerKey);
+//            scheduler.resumeTrigger(triggerKey);
+            System.out.println("=========================delete trigger:" + triggerName+":"+triggerGroup + " success========================");
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+    }
 }

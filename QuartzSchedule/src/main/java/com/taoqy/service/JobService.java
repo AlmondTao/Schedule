@@ -45,4 +45,12 @@ public interface JobService {
      * @param jobGroup
      */
     void deleteJob(String jobName, String jobGroup);
+    /**
+     * 重新设置job
+     * @param jobName
+     * @param jobGroup
+     */
+    void reSetCronJob(String jobName, String jobGroup, String cron);
+
+    void deleteTrigger(String triggerName, String triggerGroup);
 }

@@ -34,6 +34,23 @@ public class JobController {
         jobService.addCronJob(jobName,jobGroup);
         return "create cron task success";
     }
+    //重新设置cron
+    @RequestMapping(value = "/reset",method = RequestMethod.POST)
+    public String reSetCronJob(@RequestParam("jobName") String jobName,
+                               @RequestParam("jobGroup") String jobGroup,
+                               @RequestParam("cron")String cron){
+        jobService.reSetCronJob(jobName,jobGroup,cron);
+        return "reset cron task success";
+    }
+
+    //删除trigger
+    //删除trigger后若有没有被trigger引用的job，则job也会被删除
+    @RequestMapping(value = "/deleteTrigger",method = RequestMethod.POST)
+    public String deleteTrigger(@RequestParam("triggerName") String triggerName,
+                               @RequestParam("triggerGroup") String triggerGroup){
+        jobService.deleteTrigger(triggerName,triggerGroup);
+        return "delete trigger success";
+    }
 
     /**
      * 创建异步任务
