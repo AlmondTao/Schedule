@@ -1,3 +1,4 @@
+
 server:
   port: 8082
 spring:
@@ -10,7 +11,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     initialSize: 2
-    minIdle: 0
+    minIdle: 1
     maxActive: 20
     maxWait: 60000
     timeBetweenEvictionRunsMillis: 60000
@@ -23,6 +24,13 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     filters: stat,wall,slf4j
     logSlowSql: true
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+  resources:
+    static-locations: classpath:/static/
+
 mybatis:
   type-aliases-package: com.taoqy.entity
   configuration:

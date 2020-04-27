@@ -82,6 +82,8 @@ public class ScheduleConfiguration {
     private void addCronJob(SchedulerFactoryBean schedulerFactoryBean) {
         try {
             Scheduler scheduler = schedulerFactoryBean.getScheduler();
+            scheduler.getSchedulerName();
+
             if (jobList == null || jobList.size() == 0){
                 logger.warn("无定时任务");
             }else {
@@ -103,6 +105,7 @@ public class ScheduleConfiguration {
                         boolean exist = scheduler.deleteJob(jobKey);
                         //构建job信息
                         JobDetail jobDetail = JobBuilder.newJob(job.getClass()).usingJobData(jobDataMap).withIdentity(jobName, jobGroup).build();;
+
                         if (exist) {
                             logger.warn("jobGroup:"+jobGroup+" jobName:"+jobName+ " 已存在");
                             logger.warn("jobGroup:"+jobGroup+" jobName:"+jobName+ " 更新成功");
@@ -111,6 +114,7 @@ public class ScheduleConfiguration {
                         }
 
                         Trigger trigger = scheduler.getTrigger(triggerKey);
+
                         if (trigger != null){
                             logger.warn("jobGroup:"+getTriggerGroup(jobGroup)+" jobName:"+getTriggerName(jobName)+ " 已存在");
                             logger.warn("jobGroup:"+getTriggerGroup(jobGroup)+" jobName:"+getTriggerName(jobName)+ " Resume TriggerDetail");

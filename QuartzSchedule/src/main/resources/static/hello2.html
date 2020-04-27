@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+<div id="app-1">
+    <p>{{ message }}</p>
+</div>
+<div id="app-2">
+    <span v-bind:title="message">
+        鼠标悬停几秒钟查看此处动态绑定的提示信息！
+    </span>
+</div>
+<div id="app-3">
+    <p v-if="seen1">你能看见我么</p>
+</div>
+
+<div id="app-5">
+    <p>{{message}}</p>
+    <button v-on:click="behiddenMethod">{{buttonName}}</button>
+</div>
+
+<div id = "app-4">
+    <ol>
+        <li v-for="t in themes">
+            {{t.name}}
+        </li>
+    </ol>
+</div>
+
+<div id="app-6">
+    <p>{{message}}</p>
+    <input v-model="message">
+</div>
+
+<div id="app-7">
+    <ol>
+        <my-list v-for="item in foodList"
+                v-bind:food="item"
+                v-bind:key="item.id">
+
+        </my-list>
+    </ol>
+</div>
+<script>
+    var v1 = new Vue({
+        el: '#app-1',
+        data: {
+            message: 'Hello zhangsan.js!'
+        }
+    })
+    var app2 = new Vue({
+        el:'#app-2',
+        data:{
+            message: '页面加载于'+new Date().toLocaleString(),
+            seen:true
+        }
+    })
+    var app3 = new Vue({
+        el:'#app-3',
+        data:
+            {seen1:true,
+            seen2:false}
+
+
+
+    })
+
+    var app4 = new Vue({
+        el:'#app-4',
+        data:{
+            themes:[
+                {name:'英雄联盟'},
+                {name:'StreetFighterV'},
+                {name:'FireStone'}
+            ]
+        }
+    })
+    var app5 = new Vue({
+        el:'#app-5',
+        data:{
+            message:"点击按钮进行隐藏",
+            buttonName1:'隐藏',
+            buttonName2:'显示',
+            buttonName:'隐藏'
+        },
+        methods:{
+            behiddenMethod:function () {
+                var s1 =  this.buttonName;
+                var s2 = this.buttonName1;
+                var obj = document.getElementById("app-3").getElementsByTagName("p");
+                if (this.buttonName == this.buttonName1){
+                    this.buttonName = this.buttonName2;
+                    app3.seen1=false;
+                    this.message = "点击按钮进行显示";
+                    // for (j = 0,len = obj.length;j < len; j++){
+                    //     obj[j].setAttribute("v-if","seen1");
+                    // }
+                } else{
+                    this.buttonName = this.buttonName1;
+                    app3.seen1=true;
+                    this.message = "点击按钮进行隐藏";
+                    // for (j = 0; j<obj.length; j++){
+                    //     obj[j].setAttribute("v-if","seen2");
+                    // }
+
+                }
+            }
+
+        }
+    })
+
+    var app6 = new Vue({
+        el:'#app-6',
+        data:{
+            message:'输入想要展示的信息'
+        }
+    })
+
+    Vue.component('my-list',{
+        props:['food'],
+        template:'<li>{{food.name}}</li>'
+    })
+
+    var app7 = new Vue({
+        el:'#app-7',
+        data:{
+            foodList:[
+            {name:'蛋白质',id:'1'},
+            {name:'碳水',id:'2'},
+            {name:'脂肪',id:'3'}
+            ]
+        }
+    })
+
+</script>
+</body>
+</html>
