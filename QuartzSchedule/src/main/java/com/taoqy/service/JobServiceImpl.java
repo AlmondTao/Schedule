@@ -137,7 +137,8 @@ public class JobServiceImpl implements  JobService {
             Scheduler scheduler = schedulerFactoryBean.getScheduler();
             CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cron);
             TriggerKey triggerKey = TriggerKey.triggerKey(jobName + "_trigger", jobGroup + "_trigger");
-            Trigger trigger = TriggerBuilder.newTrigger().withIdentity(jobName + "_trigger", jobGroup + "_trigger")
+            Trigger trigger = TriggerBuilder.newTrigger().withIdentity(
+                    jobName + "_trigger", jobGroup + "_trigger")
                     .withSchedule(scheduleBuilder).usingJobData(jobDataMap).build();
             scheduler.rescheduleJob(triggerKey, trigger);
 //            scheduler.resumeTrigger(triggerKey);

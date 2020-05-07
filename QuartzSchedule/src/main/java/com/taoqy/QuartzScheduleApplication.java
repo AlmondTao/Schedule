@@ -14,7 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since bapfopm-pfpsmas-cbfsms-service 1.0
  */
 @SpringBootApplication
-@MapperScan("com.taoqy.mapper")
+@MapperScan("com.taoqy.dao")
 public class QuartzScheduleApplication {
     public static void main(String[] args) {
             SpringApplication.run(QuartzScheduleApplication.class,args);

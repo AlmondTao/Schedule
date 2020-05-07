@@ -3,6 +3,7 @@ package com.taoqy.service;
 
 import com.taoqy.config2.quartz.SXZDJob;
 
+import com.xxl.job.core.handler.annotation.XxlJob;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.stereotype.Component;
@@ -20,12 +21,15 @@ import java.time.LocalDateTime;
  */
 @Component
 public class CronJob implements SXZDJob {
+
+
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
 //        System.out.println("=========================定时任务每5秒执行一次===============================");
 //        System.out.println("jobName=====:"+context.getJobDetail().getKey().getName());
 //        System.out.println("jobGroup=====:"+context.getJobDetail().getKey().getGroup());
 //        System.out.println("taskData=====:"+context.getJobDetail().getJobDataMap().get("taskData"));
+
         System.out.println("CronJob执行定时任务,我需要执行10s，线程id ==> {"+Thread.currentThread().getId()+ "} "+ LocalDateTime.now().toLocalTime());
         try {
             Thread.sleep(10000);
@@ -54,6 +58,6 @@ public class CronJob implements SXZDJob {
 
     @Override
     public boolean disabled() {
-        return true;
+        return false;
     }
 }

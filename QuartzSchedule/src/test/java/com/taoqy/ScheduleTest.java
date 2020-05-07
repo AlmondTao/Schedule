@@ -49,4 +49,14 @@ public class ScheduleTest {
     }
 
 
+    @Test
+    public void getClassByClassName() throws ClassNotFoundException {
+
+        Class<?> aClass = Class.forName("com.taoqy.service.CronJob");
+        Class<? extends Class> aClass1 = aClass.getClass();
+        System.out.println(aClass);
+        System.out.println(aClass1);
+
+    }
+
 }

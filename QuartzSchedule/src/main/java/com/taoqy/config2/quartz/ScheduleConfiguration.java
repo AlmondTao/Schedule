@@ -101,6 +101,7 @@ public class ScheduleConfiguration {
                     //用JopDataMap来传递数据
                     JobDataMap jobDataMap = new JobDataMap();
                     jobDataMap.put("healer", "hehehe2");
+                    Class<SXZDJob> aClass = (Class<SXZDJob>) Class.forName("com.taoqy.service.CronJob");
                     if (job.disabled()){
                         boolean exist = scheduler.deleteJob(jobKey);
                         //构建job信息
