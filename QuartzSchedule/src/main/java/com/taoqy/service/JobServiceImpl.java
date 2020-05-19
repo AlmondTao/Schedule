@@ -1,8 +1,11 @@
 package com.taoqy.service;
 
+import com.taoqy.common.SpringContextUtil;
 import com.taoqy.config2.quartz.SXZDJob;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +23,8 @@ import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 @Service
 public class JobServiceImpl implements  JobService {
 //    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-    @Autowired
-    private SchedulerFactoryBean schedulerFactoryBean;
+//    @Autowired
+//    private SchedulerFactoryBean schedulerFactoryBean;
 
     /**
      * 创建一个定时任务
@@ -32,6 +35,7 @@ public class JobServiceImpl implements  JobService {
     @Override
     public void addCronJob(String jobName, String jobGroup) {
         try {
+            SchedulerFactoryBean schedulerFactoryBean = (SchedulerFactoryBean) SpringContextUtil.getBean("schedulerFactoryBean");
             Scheduler scheduler = schedulerFactoryBean.getScheduler();
 
             JobKey jobKey = JobKey.jobKey(jobName, jobGroup);
@@ -62,6 +66,7 @@ public class JobServiceImpl implements  JobService {
     @Override
     public void addAsyncJob(String jobName, String jobGroup) {
         try {
+            SchedulerFactoryBean schedulerFactoryBean = (SchedulerFactoryBean) SpringContextUtil.getBean("schedulerFactoryBean");
             Scheduler scheduler = schedulerFactoryBean.getScheduler();
 
             JobKey jobKey = JobKey.jobKey(jobName, jobGroup);
@@ -88,6 +93,7 @@ public class JobServiceImpl implements  JobService {
     @Override
     public void pauseJob(String jobName, String jobGroup) {
         try {
+            SchedulerFactoryBean schedulerFactoryBean = (SchedulerFactoryBean) SpringContextUtil.getBean("schedulerFactoryBean");
             Scheduler scheduler = schedulerFactoryBean.getScheduler();
             TriggerKey triggerKey = TriggerKey.triggerKey(jobName + "_trigger", jobGroup + "_trigger");
 
@@ -107,6 +113,7 @@ public class JobServiceImpl implements  JobService {
     @Override
     public void resumeJob(String jobName, String jobGroup) {
         try {
+            SchedulerFactoryBean schedulerFactoryBean = (SchedulerFactoryBean) SpringContextUtil.getBean("schedulerFactoryBean");
             Scheduler scheduler = schedulerFactoryBean.getScheduler();
             TriggerKey triggerKey = TriggerKey.triggerKey(jobName + "_trigger", jobGroup + "_trigger");
             scheduler.resumeTrigger(triggerKey);
@@ -119,6 +126,7 @@ public class JobServiceImpl implements  JobService {
     @Override
     public void deleteJob(String jobName, String jobGroup) {
         try {
+            SchedulerFactoryBean schedulerFactoryBean = (SchedulerFactoryBean) SpringContextUtil.getBean("schedulerFactoryBean");
             Scheduler scheduler = schedulerFactoryBean.getScheduler();
             JobKey jobKey = JobKey.jobKey(jobName,jobGroup);
             scheduler.deleteJob(jobKey);
@@ -132,6 +140,7 @@ public class JobServiceImpl implements  JobService {
     @Override
     public void reSetCronJob(String jobName, String jobGroup, String cron) {
         try {
+            SchedulerFactoryBean schedulerFactoryBean = (SchedulerFactoryBean) SpringContextUtil.getBean(SchedulerFactoryBean.class);
             JobDataMap jobDataMap = new JobDataMap();
             jobDataMap.put("healer", "hehehe2");
             Scheduler scheduler = schedulerFactoryBean.getScheduler();
@@ -151,6 +160,7 @@ public class JobServiceImpl implements  JobService {
     @Override
     public void deleteTrigger(String triggerName, String triggerGroup) {
         try {
+            SchedulerFactoryBean schedulerFactoryBean = (SchedulerFactoryBean) SpringContextUtil.getBean("schedulerFactoryBean");
             JobDataMap jobDataMap = new JobDataMap();
             jobDataMap.put("healer", "hehehe2");
             Scheduler scheduler = schedulerFactoryBean.getScheduler();

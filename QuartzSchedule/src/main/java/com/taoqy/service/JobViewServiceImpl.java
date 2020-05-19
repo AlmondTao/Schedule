@@ -1,5 +1,6 @@
 package com.taoqy.service;
 
+import com.taoqy.common.SpringContextUtil;
 import com.taoqy.dao.QrtzMapper;
 import com.taoqy.entity.QrtzJobDetails;
 import com.taoqy.entity.ServiceResult;
@@ -23,14 +24,15 @@ import java.util.List;
 @Service
 public class JobViewServiceImpl implements  JobViewService {
 
-    @Autowired
-    private SchedulerFactoryBean schedulerFactoryBean;
+//    @Autowired
+//    private SchedulerFactoryBean schedulerFactoryBean;
 
     @Autowired
     private QrtzMapper qrtzMapper;
 
     @Override
     public ServiceResult getJobGroupList(String schedName) {
+        SchedulerFactoryBean schedulerFactoryBean = (SchedulerFactoryBean) SpringContextUtil.getBean(SchedulerFactoryBean.class);
         Scheduler scheduler = schedulerFactoryBean.getScheduler();
         List<String> jobGroupNames = null;
         try {

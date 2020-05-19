@@ -5,7 +5,7 @@ spring:
   application:
     name: QuartzSchedule
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/schedule?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://10.1.92.9:3306/schedule?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
     username: taoqy
     password: password123
     driver-class-name: com.mysql.jdbc.Driver
@@ -42,11 +42,11 @@ xxl:
   job:
     executor:
       appname: xxl-job-executor-taoqy
-      ip: 127.0.0.1
-      port: 8183
+      ip: 10.1.92.9
+      port: 8182
       logpath: /data/applogs/xxl-job/jobhandler
       logretentiondays: 30
       address:
     accessToken:
     admin:
-      addresses: http://127.0.0.1:8080/xxl-job-admin
+      addresses: http://10.1.92.9:8080/xxl-job-admin
